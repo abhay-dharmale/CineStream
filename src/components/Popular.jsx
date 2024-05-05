@@ -16,6 +16,9 @@ const Popular = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  document.title = `Popular | MovieApp`
+
+
   const getPopular = async () => {
     try {
       const { data } = await axios.get(
@@ -36,6 +39,7 @@ const Popular = () => {
     if (popular.length === 0) {
       getPopular();
     } else {
+      // setHasMore(true);
       setPage(1);
       setPopular([]);
       getPopular();
@@ -50,19 +54,19 @@ const Popular = () => {
     <div className="w-screen h-[100vh] px-[2%]">
       <div className="w-full flex items-center justify-between">
         <div className="w-[20%]">
-          <h1 className="text-xl text-zinc-400 font-semibold">
+          <h1 className="text-xl text-zinc-400 font-semibold hover:text-[#6556CD] cursor-pointer" onClick={() => navigate(-1)}>
             <i
               onClick={() => navigate(-1)}
               className="ri-arrow-left-line hover:text-[#6556CD] cursor-pointer text-md"
             ></i>{" "}
-            Popular
+            Popular <span className="text-zinc-500 text-md font-regular">({category})</span>
           </h1>
         </div>
         <div className="flex items-center w-[80%]">
           <Topnav />
           <Dropdown
             title="Category"
-            options={["tv", "movie", "all"]}
+            options={["tv", "movie"]}
             func={(e) => setCategory(e.target.value)}
           />
           <div className="w-[10px]"></div>

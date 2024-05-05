@@ -10,12 +10,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Movies = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [category, setCategory] = useState("now_playing");
 //   const [duration, setDuration] = useState("week");
   const [movie, setmovie] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+
+  document.title = `Movies | MovieApp`
+
 
   const getmovie = async () => {
     try {
@@ -47,24 +50,23 @@ const Movies = () => {
     refreshHandler();
   }, [category]);
 
-  return 
-    movie.length > 0 ? (
+  return movie.length > 0 ? (
         <div className="w-screen h-[100vh] px-[2%]">
           <div className="w-full flex items-center justify-between">
             <div className="w-[20%]">
-              <h1 className="text-xl text-zinc-400 font-semibold">
+              <h1 className="text-xl text-zinc-400 font-semibold hover:text-[#6556CD] cursor-pointer" onClick={() => navigate(-1)}>
                 <i
                   onClick={() => navigate(-1)}
                   className="ri-arrow-left-line hover:text-[#6556CD] cursor-pointer text-md"
                 ></i>{" "}
-                movie
+                Movies <span className="text-zinc-500 text-md font-regular">({category})</span>
               </h1>
             </div>
             <div className="flex items-center w-[80%]">
               <Topnav />
               <Dropdown
                 title="Category"
-                options={["tv", "movie", "all"]}
+                options={["popular", "now_playing", "upcoming", "top_rated"]}
                 func={(e) => setCategory(e.target.value)}
               />
               <div className="w-[10px]"></div>

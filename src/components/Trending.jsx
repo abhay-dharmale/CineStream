@@ -10,11 +10,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Trending = () => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("movie");
   const [duration, setDuration] = useState("week");
   const [trending, setTrending] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+
+  document.title = `Trending | MovieApp`
 
   const getTrending = async () => {
     try {
@@ -51,12 +53,12 @@ const Trending = () => {
     <div className="w-screen h-[100vh] px-[2%]">
       <div className="w-full flex items-center justify-between">
         <div className="w-[20%]">
-          <h1 className="text-xl text-zinc-400 font-semibold">
+          <h1 className="text-xl text-zinc-400 font-semibold hover:text-[#6556CD] cursor-pointer" onClick={() => navigate(-1)}>
             <i
               onClick={() => navigate(-1)}
               className="ri-arrow-left-line hover:text-[#6556CD] cursor-pointer text-md"
             ></i>{" "}
-            Trending
+            Trending <span className="text-zinc-500 text-md font-regular">({category}{" - "}{duration})</span>
           </h1>
         </div>
         <div className="flex items-center w-[80%]">
