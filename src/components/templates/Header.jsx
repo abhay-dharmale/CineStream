@@ -12,17 +12,23 @@ const Header = ({ data }) => {
         backgroundPosition: "70% 30%",
         backgroundRepeat: "no-repeat",
       }}
-      className="h-[60vh] w-[97%] m-auto rounded-md flex flex-col justify-end items-start p-10"
+      className="h-[60vh] w-[97%] m-auto rounded-md flex flex-col justify-end items-start p-6 md:p-10"
     >
-      <h1 className="text-5xl font-bold text-white mb-7">
+      <h1 className="text-xl md:text-5xl font-bold text-white mb-7">
         {data.name || data.original_title || data.original_name || data.title}
       </h1>
-      <p className="text-zinc-200 w-[60%] mb-3">
-        {data.overview.slice(0,250)} .....
+      <p className="text-xs md:text-md text-zinc-200 w-[60%] mb-3">
+        {data.overview.slice(0, 150)} .....
         <Link className="text-blue-400">more</Link>
       </p>
-      <p className="text-zinc-200 font-semibold mb-3">Release date: {data.release_date || "No Information"} <i className="ri-album-fill ml-4 mr-1 text-[#8a80cd]"></i>{data.media_type.toUpperCase()}</p>
-      <Link className="px-5 py-2 bg-[#6e61c7] rounded text-white hover:bg-[#473c91] font-semibold transition-all">Watch Trailer</Link>
+      <p className="text-xs md:text-md text-zinc-200 font-semibold mb-3">
+        Release date: {data.release_date || "No Information"}{" "}
+        <i className="ri-album-fill ml-4 mr-1 text-[#8a80cd]"></i>
+        {data.media_type.toUpperCase()}
+      </p>
+      <Link className="px-5 py-2 bg-[#6e61c7] rounded text-white text-xs md:text-md hover:bg-[#473c91] font-semibold transition-all">
+        Watch Trailer
+      </Link>
     </div>
   );
 };
