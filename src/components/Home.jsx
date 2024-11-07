@@ -46,7 +46,7 @@ const Home = () => {
         <Topnav />
         <Header data={wallpaper} />
 
-        <div className="p-6 flex items-center justify-between">
+        <div className="px-6 py-4 flex items-center justify-between">
           <h1 className="text-lg md:text-xl text-zinc-300 font-bold ">
             Trending
           </h1>

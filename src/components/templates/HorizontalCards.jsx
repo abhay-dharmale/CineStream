@@ -3,12 +3,12 @@ import Dropdown from "./Dropdown";
 
 const HorizontalCards = ({ data, func }) => {
   return (
-    <div className="w-full h-[80vh] p-5 ">
+    <div className="w-full h-[60vh] lg:h-[80vh] p-5">
       <div className="w-full flex mb-5 overflow-y-hidden">
         {data.map((data, index) => (
           <div
             key={index}
-            className="min-w-[60%] max-h-fit md:min-w-[40%] lg:min-w-[20%] md:max-h-full mr-5 mb-5 overflow-x-auto rounded-md bg-zinc-800 p-1"
+            className="min-w-[60%] max-h-[90vh] md:min-w-[40%] lg:min-w-[20%] md:max-h-full mr-5 mb-5 overflow-x-auto rounded-md bg-zinc-800 p-1"
           >
             <img
               className="w-full object-cover rounded-md"
