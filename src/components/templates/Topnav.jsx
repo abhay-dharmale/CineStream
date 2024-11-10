@@ -2,10 +2,13 @@ import axios from "../../utils/axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import noImage from "/noImage.png";
+import { useSideNav } from "../../Context/SideNavContext";
 
 const Topnav = () => {
   const [query, setQuery] = useState("");
   const [searches, setSearches] = useState([]);
+
+  const { toggleSideNav } = useSideNav();
 
   const getSearches = async () => {
     try {
@@ -22,6 +25,13 @@ const Topnav = () => {
 
   return (
     <div className="relative w-full h-[6vh] p-9 md:p-0 md:h-[10vh] flex justify-center items-center">
+      {/* Menu button */}
+      <button
+        onClick={toggleSideNav}
+        className=" z-[50] text-white bg-zinc-800 px-3 py-2 mr-10 rounded-md shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+      >
+        <i className="ri-menu-line text-lg"></i>
+      </button>
       <input
         onChange={(e) => setQuery(e.target.value)}
         value={query}

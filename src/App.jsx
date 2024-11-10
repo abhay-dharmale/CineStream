@@ -7,10 +7,12 @@ import Popular from './components/Popular'
 import Movies from './components/Movies'
 import TvShows from './components/TvShows'
 import People from './components/People'
+import { SideNavProvider } from './Context/SideNavContext'
 
 const App = () => {
   return (
-    <div className='w-screen h-screen bg-[#1F1E24] flex'>
+  <SideNavProvider>
+    <div className='w-screen h-screen bg-[#1F1E24] flex overflow-hidden'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/trending' element={<Trending />} />
@@ -20,6 +22,7 @@ const App = () => {
         <Route path='/people' element={<People />} />
       </Routes>
     </div>
+  </SideNavProvider>
   )
 }
 

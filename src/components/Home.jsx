@@ -41,9 +41,9 @@ const Home = () => {
 
   return wallpaper && trending ? (
     <>
-      <SideNav />
+      <SideNav /> {/* Removed toggleSideNav and isOpen props */}
       <div className="w-full h-full overflow-y-auto">
-        <Topnav />
+        <Topnav /> {/* Removed toggleSideNav prop */}
         <Header data={wallpaper} />
 
         <div className="px-6 py-4 flex items-center justify-between">
@@ -63,4 +63,5 @@ const Home = () => {
     <Loading />
   );
 };
+
 export default Home;
