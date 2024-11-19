@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSideNav } from '../../Context/SideNavContext';
+import { useSideNav } from "../../Context/SideNavContext";
 
 const SideNav = () => {
   const { isOpen, toggleSideNav } = useSideNav();
@@ -29,30 +29,35 @@ const SideNav = () => {
         <nav className="flex flex-col space-y-3">
           <h2 className="text-lg font-semibold text-[#6556CD]">New Feeds</h2>
           <Link
+            onClick={toggleSideNav}
             to="/trending"
             className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
           >
             <i className="mr-3 ri-fire-fill"></i>Trending
           </Link>
           <Link
+            onClick={toggleSideNav}
             to="/popular"
             className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
           >
             <i className="mr-3 ri-bard-fill"></i>Popular
           </Link>
           <Link
-            to="/movies"
+            onClick={toggleSideNav}
+            to="/movie"
             className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
           >
             <i className="mr-3 ri-movie-2-fill"></i>Movies
           </Link>
           <Link
-            to="/tvshows"
+            onClick={toggleSideNav}
+            to="/tv"
             className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
           >
             <i className="mr-3 ri-tv-2-fill"></i>TV Shows
           </Link>
           <Link
+            onClick={toggleSideNav}
             to="/people"
             className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
           >

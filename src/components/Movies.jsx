@@ -17,30 +17,29 @@ const Movies = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  document.title = `Movies | MovieApp`;
+  useEffect(() => {
+    document.title = "Movies | MovieApp";
+  }, []);
 
   const getMovie = async () => {
     try {
       const { data } = await axios.get(`/movie/${category}?page=${page}`);
       if (data.results.length > 0) {
         setMovie((prev) => [...prev, ...data.results]);
-        setPage(page + 1);
+        setPage((prev) => prev + 1);
       } else {
         setHasMore(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching movie data:", error);
     }
   };
 
   const refreshHandler = () => {
-    if (movie.length === 0) {
-      getMovie();
-    } else {
-      setPage(1);
-      setMovie([]);
-      getMovie();
-    }
+    setPage(1);
+    setMovie([]);
+    setHasMore(true);
+    getMovie();
   };
 
   useEffect(() => {
@@ -48,49 +47,64 @@ const Movies = () => {
   }, [category]);
 
   return movie.length > 0 ? (
-    <div className="flex flex-col h-screen bg-zinc-900">
+    <div className="flex h-full w-screen">
       <SideNav toggleSideNav={toggleSideNav} isOpen={isOpen} />
-      
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-4 gap-4 bg-zinc-900">
-        <div className="flex items-center gap-2">
-          <i
-            onClick={() => navigate(-1)}
-            className="ri-arrow-left-line text-zinc-400 hover:text-[#6556CD] cursor-pointer text-xl"
-          />
-          <h1 className="text-xl text-zinc-400 font-semibold">
-            Movies{" "}
-            <span className="text-zinc-500 text-md font-normal">
-              ({category.replace(/_/g, " ")})
-            </span>
-          </h1>
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 w-full md:w-auto">
-          <div className="w-full md:w-auto">
-            <Topnav />
-          </div>
-          <div className="w-full md:w-auto">
-            <Dropdown
-              title="Category"
-              options={["popular", "now_playing", "upcoming", "top_rated"]}
-              func={(e) => setCategory(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
 
-      {/* Content Section */}
-      <div className="flex-1 overflow-auto">
-        <InfiniteScroll
-          dataLength={movie.length}
-          next={getMovie}
-          hasMore={hasMore}
-          loader={<h4 className="text-zinc-300 text-center py-4">Loading...</h4>}
-          scrollThreshold={0.9}
-        >
-          <Cards data={movie} title={category} />
-        </InfiniteScroll>
+      <div className="flex-grow overflow-y-auto">
+        {/* Header */}
+        <div className="sticky top-0 z-10 bg-[#1F1E24] shadow-md">
+          <div className="px-4 py-3 md:px-6 md:py-4">
+            {/* Back Navigation */}
+            <div className="flex items-center space-x-3 mb-4 md:mb-0">
+              <button
+                onClick={() => navigate(-1)}
+                className="p-2 hover:bg-zinc-700 rounded-full transition-colors"
+              >
+                <i className="ri-arrow-left-line text-zinc-400 hover:text-[#6556CD]" />
+              </button>
+              <h1 className="text-lg md:text-xl text-zinc-400 font-semibold">
+                Movies
+                <span className="ml-2 text-zinc-500 text-base font-normal">
+                  ({category.replace(/_/g, " ")})
+                </span>
+              </h1>
+            </div>
+
+            {/* Navigation Bar */}
+            <div className="mt-3 md:mt-4 flex flex-col space-y-3 md:flex-row md:items-center md:space-y-0 md:space-x-4">
+              <div className="flex-grow">
+                <Topnav />
+              </div>
+              <div className="w-full md:w-auto">
+                <Dropdown
+                  title="Category"
+                  options={["popular", "now_playing", "upcoming", "top_rated"]}
+                  func={(e) => setCategory(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="h-[1px] bg-zinc-800 w-full" />
+        </div>
+
+        {/* Content */}
+        <div className="px-2 md:px-4 pb-4">
+          <InfiniteScroll
+            dataLength={movie.length}
+            next={getMovie}
+            hasMore={hasMore}
+            loader={
+              <div className="flex justify-center py-4">
+                <div className="text-zinc-300 text-center px-4 py-2 bg-zinc-800/50 rounded-full">
+                  Loading...
+                </div>
+              </div>
+            }
+            scrollThreshold={0.9}
+          >
+            <Cards data={movie} title="movie" />
+          </InfiniteScroll>
+        </div>
       </div>
     </div>
   ) : (
