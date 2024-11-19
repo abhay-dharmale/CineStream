@@ -24,13 +24,13 @@ const Topnav = () => {
   }, [query]);
 
   return (
-    <div className="relative w-full h-[6vh] p-9 md:p-0 md:h-[10vh] flex justify-center items-center">
+    <div className="relative w-full h-[6vh] p-9 md:px-9 md:h-[10vh] flex items-center justify-center">
       {/* Menu button */}
       <button
         onClick={toggleSideNav}
-        className=" z-[50] text-white bg-zinc-800 px-3 py-2 mr-10 rounded-md shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
+        className=" z-[50] text-white mr-10 underline rounded-md shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
       >
-        <i className="ri-menu-line text-lg"></i>
+        {/* <i className="ri-menu-line text-lg"></i> */}menu
       </button>
       <input
         onChange={(e) => setQuery(e.target.value)}

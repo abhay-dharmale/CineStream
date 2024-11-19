@@ -45,9 +45,8 @@ const Home = () => {
       <div className="w-full h-full overflow-y-auto">
         <Topnav /> {/* Removed toggleSideNav prop */}
         <Header data={wallpaper} />
-
         <div className="px-6 py-4 flex items-center justify-between">
-          <h1 className="text-lg md:text-xl text-zinc-300 font-bold ">
+          <h1 className="text-lg md:text-xl text-zinc-300 font-bold mt-5">
             Trending
           </h1>
           <Dropdown
