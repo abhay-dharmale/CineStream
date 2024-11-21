@@ -35,11 +35,11 @@ const Topnav = () => {
       <input
         onChange={(e) => setQuery(e.target.value)}
         value={query}
-        className="relative w-[70%] md:w-[50%] px-3 py-2 bg-[#4f4d58] outline-none rounded-bl-md rounded-tl-md text-zinc-200"
+        className="relative w-[70%] md:w-[50%] px-3 py-2 bg-zinc-700 outline-none rounded-bl-md rounded-tl-md text-zinc-200"
         type="text"
         placeholder="search anything"
       />
-      <i className="text-zinc-300 text-xl ri-search-line bg-[#4f4d58] px-3 py-[6px] rounded-br-md rounded-tr-md border-l-[1.2px] border-zinc-500 cursor-pointer"></i>
+      <i className="text-zinc-300 text-xl ri-search-line bg-zinc-700 px-3 py-[6px] rounded-br-md rounded-tr-md border-l-[1.2px] border-zinc-500 cursor-pointer"></i>
       {query.length > 0 && (
         <i
           onChange={() => setQuery("")}
@@ -48,11 +48,12 @@ const Topnav = () => {
         ></i>
       )}
 
-      <div className="absolute w-[68%] md:w-[50%] h-fit max-h-[40vh] bg-zinc-700 top-[77%] overflow-y-auto overflow-x-hidden rounded-bl-md rounded-br-md">
+      <div className="absolute z-[199] w-[68%] md:w-[47.5%] h-fit max-h-[40vh] bg-zinc-700 top-[77%] left-[27%] lg:left-[27.7%] overflow-y-auto overflow-x-hidden rounded-md lg:rounded-none rounded-bl-md rounded-br-md">
         {searches.map((search, index) => (
           <Link
+            to={`/${search.media_type}/details/${search.id}`}
             key={index}
-            className="flex hover:bg-zinc-500 hover:text-white text-zinc-100 transition-all duration-150 font-semibold tracking-tight border-b-[0.5px] border-zinc-500 w-full px-6 py-3 items-center gap-5 justify-start"
+            className="flex hover:bg-zinc-600 hover:text-white text-zinc-100 transition-all duration-150 font-semibold tracking-tight border-b-[0.5px] border-zinc-500 w-full px-6 py-3 items-center gap-5 justify-start"
           >
             <img
               className="w-[12vw] h-[10vh] md:w-[8vw] object-cover rounded-lg mr-3 shadow-lg"

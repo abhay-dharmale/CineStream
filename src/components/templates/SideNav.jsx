@@ -13,10 +13,14 @@ const SideNav = () => {
         }  w-[70%] md:w-[50%] lg:w-[80%] h-full bg-[#1F1E24] border-r-[1px] border-zinc-600 p-6 lg:px-[10vw] lg:py-10 text-white fixed z-[99] transition-transform duration-300 shadow-lg rounded-l-lg`}
       >
         <h1 className="lg:text-xl font-semibold flex items-center justify-between mb-6">
-          <span className="flex items-center">
+          <Link
+            to={"/"}
+            onClick={toggleSideNav}
+            className="flex items-center hover: pointer"
+          >
             <i className="text-[#6556CD] ri-tv-line mr-3 text-xl"></i>
-            <span className="text-xl lg:text-2xl font-bold">Web App</span>
-          </span>
+            <span className="text-xl lg:text-2xl font-bold">CineStream</span>
+          </Link>
           <span
             className="text-sm text-zinc-400 hover:text-white cursor-pointer "
             onClick={toggleSideNav} // Close sideNav on click
@@ -26,8 +30,15 @@ const SideNav = () => {
         </h1>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col space-y-3">
+        <nav className="flex flex-col space-y-2">
           <h2 className="text-lg font-semibold text-[#6556CD]">New Feeds</h2>
+          <Link
+            onClick={toggleSideNav}
+            to="/"
+            className="flex items-center hover:bg-[#6556CD] hover:text-white px-4 py-2 font-medium rounded-lg transition-all duration-200 text-base lg:text-xl"
+          >
+            <i className="mr-3 ri-home-3-fill"></i>Home
+          </Link>
           <Link
             onClick={toggleSideNav}
             to="/trending"
