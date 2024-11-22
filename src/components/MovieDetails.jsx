@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router";
 import { asyncloadmovie, removemovie } from "../store/actions/movieActions";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
+import HorizontalCards from "./templates/HorizontalCards";
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
@@ -17,7 +18,7 @@ const MovieDetails = () => {
     return () => {
       dispatch(removemovie());
     };
-  }, []);
+  }, [id]);
 
   return info ? (
     <div
@@ -31,9 +32,12 @@ const MovieDetails = () => {
     >
       <nav
         style={{
-          background: `linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,0.1), rgba(0,0,0,0.7))`,
+          background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6))`,
+          backdropFilter: "blur(8px)", // Slightly stronger blur
+          WebkitBackdropFilter: "blur(8px)", // Safari support
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)", // Subtle shadow for depth
         }}
-        className="w-full flex h-14 items-center justify-between text-white gap-10 text-md lg:text-xl px-4"
+        className="fixed top-0 left-0 z-[99] w-full flex h-14 items-center justify-between text-white gap-10 text-md lg:text-xl px-4"
       >
         <Link
           onClick={() => navigate(-1)}
@@ -58,7 +62,7 @@ const MovieDetails = () => {
         </div>
       </nav>
 
-      <div className="w-full py-8 px-4 lg:px-8">
+      <div className="w-full py-8 px-4 lg:px-8 mt-[10%] lg:mt-[3%]">
         <div className="w-full flex flex-col lg:flex-row">
           <div className="">
             <img
@@ -68,13 +72,13 @@ const MovieDetails = () => {
               }`}
               alt=""
             />
-            <div>
+            <div className="mt-[7vh] md:mt-0">
               {info.watchprovider && info.watchprovider.flatrate && (
-                <div className="w-full mt-5">
+                <div className="w-full">
                   <div>
                     <h1>Watch it On </h1>
                   </div>
-                  <div className="w-full flex gap-3 items-center mt-1">
+                  <div className="w-full flex flex-wrap gap-3 items-center mt-1">
                     {info.watchprovider.flatrate.map((w, i) => (
                       <img
                         title={w.provider_name}
@@ -93,7 +97,7 @@ const MovieDetails = () => {
                   <div>
                     <h1>Available on rent </h1>
                   </div>
-                  <div className="w-full flex gap-3 items-center mt-1">
+                  <div className="w-full flex flex-wrap gap-3 items-center mt-1">
                     {info.watchprovider.rent.map((w, i) => (
                       <img
                         title={w.provider_name}
@@ -112,7 +116,7 @@ const MovieDetails = () => {
                   <div>
                     <h1>Available to Buy on </h1>
                   </div>
-                  <div className="w-full flex gap-3 items-center mt-1">
+                  <div className="w-full flex flex-wrap gap-3 items-center mt-1">
                     {info.watchprovider.buy.map((w, i) => (
                       <img
                         title={w.provider_name}
@@ -176,12 +180,24 @@ const MovieDetails = () => {
                 to={`${pathname}/trailer`}
                 className="px-5 py-3 lg:py-2 bg-[#6e61c7] rounded text-white text-md md:text-md hover:bg-[#473c91] font-semibold transition-all"
               >
+                <i className="ri-play-fill mr-2"></i>
                 Play Trailer
               </Link>
             </div>
           </div>
         </div>
+
+        {/* Recommendations */}
+        <h1 className="mt-[7vh] text-2xl text-white">Similar:</h1>
+        <HorizontalCards
+          data={
+            info.recommendations.length > 0
+              ? info.recommendations
+              : info.similar
+          }
+        />
       </div>
+      <Outlet />
     </div>
   ) : (
     <Loading />
