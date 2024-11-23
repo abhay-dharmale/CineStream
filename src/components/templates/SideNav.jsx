@@ -10,7 +10,7 @@ const SideNav = () => {
       <div
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        }  w-[70%] md:w-[50%] lg:w-[80%] h-full bg-[#1F1E24] border-r-[1px] border-zinc-600 p-6 lg:px-[10vw] lg:py-10 text-white fixed z-[99] transition-transform duration-300 shadow-lg rounded-l-lg`}
+        }  w-[70%] md:w-[50%] lg:w-[80%] h-full bg-[#1F1E24] border-r-[1px] border-zinc-600 p-6 lg:px-[10vw] lg:py-10 text-white fixed z-[999] transition-transform duration-300 shadow-lg rounded-l-lg`}
       >
         <h1 className="lg:text-xl font-semibold flex items-center justify-between mb-6">
           <Link
