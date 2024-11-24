@@ -18,7 +18,7 @@ const Popular = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    document.title = "Popular | MovieApp";
+    document.title = "Popular | CineStream";
   }, []);
 
   const getPopular = async () => {
@@ -81,7 +81,10 @@ const Popular = () => {
                 <Dropdown
                   title="Category"
                   options={["tv", "movie"]}
-                  func={(e) => setCategory(e.target.value)}
+                  func={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  value={category}
                 />
               </div>
             </div>

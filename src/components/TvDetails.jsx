@@ -9,6 +9,7 @@ import SeasonsDisplay from "./SeasonsDisplay";
 import TopNav from "./templates/Topnav";
 import { useSideNav } from "../Context/SideNavContext";
 import SideNav from "./templates/SideNav";
+import noImage from "../../public/noImage.png";
 
 const TvDetails = () => {
   const { pathname } = useLocation();
@@ -76,9 +77,13 @@ const TvDetails = () => {
           <div className="">
             <img
               className="shadow-[8px_17px_38px 2px rgba(0,0,0,.5)] h-[60vh] w-full lg:w-[30vw] rounded-md object-cover"
-              src={`https://image.tmdb.org/t/p/original/${
+              src={
                 info.details.poster_path || info.details.backdrop_path
-              }`}
+                  ? `https://image.tmdb.org/t/p/original/${
+                      info.details.poster_path || info.details.backdrop_path
+                    }`
+                  : noImage
+              }
               alt=""
             />
             <div className="platforms mt-[7vh] md:mt-10">

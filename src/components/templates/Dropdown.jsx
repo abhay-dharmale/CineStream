@@ -1,24 +1,22 @@
-import React from "react";
-
-const Dropdown = ({ title, options, func }) => {
+const Dropdown = ({ title, options, func, value }) => {
   return (
-    <div className="select h-[2.5em] w-[13em] md:h-[2.5em] md:w-[15em] mt-5 lg:mt-0">
+    <div className="select h-[2.5em] w-[13em] md:h-[2.5em] md:w-[8em] mt-5 md:mt-0 lg:mt-0">
       <select
-        className=""
-        default="0"
-        name="format"
-        id="format"
+        aria-label="Dropdown Selector"
+        className="border rounded px-2 py-1"
         onChange={func}
+        value={value} // Controlled by the parent state
       >
-        <option className="">{title}</option>
+        <option value="" disabled>
+          {title}
+        </option>
         {options.map((option, index) => (
-          <option className="" key={index} value={option}>
-            {option.toUpperCase()}
+          <option key={index} value={option}>
+            {option.replace(/_/g, " ").toUpperCase()}
           </option>
         ))}
       </select>
     </div>
   );
 };
-
 export default Dropdown;

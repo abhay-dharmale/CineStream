@@ -18,13 +18,13 @@ const Movies = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    document.title = "Movies | MovieApp";
+    document.title = "Movies | CineStream";
   }, []);
 
   const getMovie = async () => {
     try {
       const { data } = await axios.get(`/movie/${category}?page=${page}`);
-      if (data.results.length > 0) {
+      if (data.results && data.results.length > 0) {
         setMovie((prev) => [...prev, ...data.results]);
         setPage((prev) => prev + 1);
       } else {
@@ -32,14 +32,15 @@ const Movies = () => {
       }
     } catch (error) {
       console.error("Error fetching movie data:", error);
+      setHasMore(false);
     }
   };
 
-  const refreshHandler = () => {
+  const refreshHandler = async () => {
     setPage(1);
     setMovie([]);
     setHasMore(true);
-    getMovie();
+    await getMovie();
   };
 
   useEffect(() => {
@@ -75,11 +76,14 @@ const Movies = () => {
               <div className="flex-grow">
                 <Topnav />
               </div>
-              <div className="w-full md:w-auto">
+              <div className="w-full flex items-center md:w-auto">
                 <Dropdown
                   title="Category"
                   options={["popular", "now_playing", "upcoming", "top_rated"]}
-                  func={(e) => setCategory(e.target.value)}
+                  func={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  value={category}
                 />
               </div>
             </div>
@@ -101,6 +105,11 @@ const Movies = () => {
               </div>
             }
             scrollThreshold={0.9}
+            endMessage={
+              <div className="text-center py-4 text-zinc-400">
+                No more movies to display.
+              </div>
+            }
           >
             <Cards data={movie} title="movie" />
           </InfiniteScroll>

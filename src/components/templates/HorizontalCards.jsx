@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import noImage from "../../../public/noImage.png";
 
 const HorizontalCards = ({ data = [] }) => {
   const scrollContainer = useRef(null);
@@ -27,8 +28,8 @@ const HorizontalCards = ({ data = [] }) => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-4">
+    <div className="w-full max-w-7xl mx-auto px-4 ">
+      <div className="flex items-center justify-between pb-3">
         <div className="flex-1" />
         <div className="flex gap-2">
           <button
@@ -50,11 +51,7 @@ const HorizontalCards = ({ data = [] }) => {
 
       <div
         ref={scrollContainer}
-        className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
+        className="flex gap-4 overflow-x-auto pb-4 p-6 snap-x snap-mandatory scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600"
       >
         {data.map((item, index) => (
           <Link
@@ -65,9 +62,13 @@ const HorizontalCards = ({ data = [] }) => {
             <div className="relative pb-[140%]">
               <img
                 className="absolute inset-0 w-full h-full object-cover rounded-t-lg"
-                src={`https://image.tmdb.org/t/p/original/${
+                src={
                   item.profile_path || item.poster_path
-                }`}
+                    ? `https://image.tmdb.org/t/p/original/${
+                        item.profile_path || item.poster_path
+                      }`
+                    : noImage
+                }
                 alt={item.name || item.title}
                 loading="lazy"
               />

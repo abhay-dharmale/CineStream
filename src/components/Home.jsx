@@ -8,7 +8,7 @@ import Dropdown from "./templates/Dropdown";
 import Loading from "./Loading";
 
 const Home = () => {
-  document.title = "Homepage";
+  document.title = "CineStream";
 
   const [wallpaper, setWallpaper] = useState(null);
   const [trending, setTrending] = useState(null);
@@ -52,7 +52,10 @@ const Home = () => {
           <Dropdown
             title="Filter"
             options={["tv", "movie", "all"]}
-            func={(e) => setCategory(e.target.value)}
+            func={(e) => {
+              setCategory(e.target.value);
+            }}
+            value={category}
           />
         </div>
         <HorizontalCards data={trending} />

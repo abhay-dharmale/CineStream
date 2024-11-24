@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import noImage from "../../../public/noImage.png";
 
 const Cards = ({ data, title }) => {
   return (
@@ -13,9 +14,15 @@ const Cards = ({ data, title }) => {
           <div className="aspect-[2/3] relative">
             <img
               className="h-full w-full object-cover rounded-t-lg"
-              src={`https://image.tmdb.org/t/p/original/${
+              src={
                 card.poster_path || card.backdrop_path || card.profile_path
-              }`}
+                  ? `https://image.tmdb.org/t/p/original/${
+                      card.poster_path ||
+                      card.backdrop_path ||
+                      card.profile_path
+                    }`
+                  : noImage
+              }
               alt={card.title || card.name}
             />
             {card.vote_average && (

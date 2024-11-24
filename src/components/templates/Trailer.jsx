@@ -19,7 +19,10 @@ const Trailer = () => {
         className="absolute top-[5%] right-[5%] text-3xl lg:text-md font-bold lg:font-normal ri-close-fill"
       ></Link>
       {ytvideo ? (
-        <ReactPlayer url={`https://www.youtube.com/watch?v=${ytvideo.key}`} />
+        <ReactPlayer
+          controls
+          url={`https://www.youtube.com/watch?v=${ytvideo.key}`}
+        />
       ) : (
         <NotFound />
       )}
