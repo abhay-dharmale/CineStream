@@ -19,7 +19,7 @@ const Trending = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    document.title = "Trending | MovieApp";
+    document.title = "Trending | CineStream";
   }, []);
 
   const getTrending = async () => {
@@ -78,16 +78,21 @@ const Trending = () => {
               <div className="flex-grow">
                 <Topnav />
               </div>
-              <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 w-full md:w-auto">
+              <div className="flex flex-col md:flex-row items-start space-y-3 md:space-y-0 md:space-x-3 w-full md:w-auto">
                 <Dropdown
                   title="Category"
                   options={["tv", "movie", "all"]}
-                  func={(e) => setCategory(e.target.value)}
+                  func={(e) => {
+                    setCategory(e.target.value);
+                  }}
                 />
                 <Dropdown
                   title="Duration"
                   options={["day", "week"]}
-                  func={(e) => setDuration(e.target.value)}
+                  func={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  value={category}
                 />
               </div>
             </div>

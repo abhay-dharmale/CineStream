@@ -5,6 +5,10 @@ import { asyncloadmovie, removemovie } from "../store/actions/movieActions";
 import Loading from "./Loading";
 import { Link } from "react-router-dom";
 import HorizontalCards from "./templates/HorizontalCards";
+import noImage from "../../public/noImage.png";
+import TopNav from "./templates/Topnav";
+import { useSideNav } from "../Context/SideNavContext";
+import SideNav from "./templates/SideNav";
 
 const MovieDetails = () => {
   const { pathname } = useLocation();
@@ -12,6 +16,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.movie);
+  const { isOpen, toggleSideNav } = useSideNav();
 
   useEffect(() => {
     dispatch(asyncloadmovie(id));
@@ -30,6 +35,7 @@ const MovieDetails = () => {
       }}
       className="w-screen overflow-y-auto text-zinc-100"
     >
+      <SideNav toggleSideNav={toggleSideNav} isOpen={isOpen} />
       <nav
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6))`,
@@ -44,17 +50,23 @@ const MovieDetails = () => {
           className="hover: text-[#6556CD] text-2xl lg:text-md font-bold lg:font-normal ri-arrow-left-line"
         ></Link>
         <div className="flex gap-5 lg:gap-10 mr-0 lg:mr-[10vw]">
-          <a target="_blank" href={info.details.homepage}>
+          <a
+            target="_blank"
+            title={info.details.homepage}
+            href={info.details.homepage}
+          >
             <i className="ri-external-link-fill"></i>
           </a>
           <a
             target="_blank"
+            title="wikipedia"
             href={`https://www.wikidata.org/wiki/${info.externalid.wikidata_id}`}
           >
             <i className="ri-earth-fill"></i>
           </a>
           <a
             target="_blank"
+            title="imdb"
             href={`https://www.imdb.com/title/${info.externalid.imdb_id}`}
           >
             imdb
@@ -63,22 +75,33 @@ const MovieDetails = () => {
       </nav>
 
       <div className="w-full py-8 px-4 lg:px-8 mt-[10%] lg:mt-[3%]">
-        <div className="w-full flex flex-col lg:flex-row">
+        <TopNav />
+        <div className="w-full flex flex-col lg:flex-row mt-[5vh]">
           <div className="">
             <img
               className="shadow-[8px_17px_38px 2px rgba(0,0,0,.5)] h-[60vh] w-full lg:w-[30vw] rounded-md object-cover"
-              src={`https://image.tmdb.org/t/p/original/${
+              src={
                 info.details.poster_path || info.details.backdrop_path
-              }`}
+                  ? `https://image.tmdb.org/t/p/original/${
+                      info.details.poster_path || info.details.backdrop_path
+                    }`
+                  : noImage
+              }
               alt=""
             />
-            <div className="mt-[7vh] md:mt-0">
+            <div className="mt-[7vh] md:mt-[2vw]">
               {info.watchprovider && info.watchprovider.flatrate && (
                 <div className="w-full">
                   <div>
                     <h1>Watch it On </h1>
                   </div>
-                  <div className="w-full flex flex-wrap gap-3 items-center mt-1">
+                  <Link
+                    to={`https://www.jiocinema.com/movies/${
+                      info.details.original_title.split("-") ||
+                      info.details.title.split("-")
+                    }`}
+                    className="w-full flex flex-wrap gap-3 items-center mt-1"
+                  >
                     {info.watchprovider.flatrate.map((w, i) => (
                       <img
                         title={w.provider_name}
@@ -88,7 +111,7 @@ const MovieDetails = () => {
                         alt=""
                       />
                     ))}
-                  </div>
+                  </Link>
                 </div>
               )}
 

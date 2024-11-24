@@ -1,43 +1,93 @@
-import React from "react";
-import Dropdown from "./Dropdown";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import noImage from "../../../public/noImage.png";
 
-const HorizontalCards = ({ data, func }) => {
+const HorizontalCards = ({ data = [] }) => {
+  const scrollContainer = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollContainer.current) {
+      const cardWidth = 300;
+      const scrollAmount = direction === "left" ? -cardWidth : cardWidth;
+      scrollContainer.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  if (!data.length) {
+    return (
+      <div className="flex items-center justify-center h-[40vh]">
+        <h1 className="text-2xl text-white text-center">
+          Nothing to show here
+        </h1>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full h-[60vh] lg:h-[70vh] py-5">
-      <div className="w-full flex mb-5 overflow-y-hidden">
-        {data.length > 0 ? (
-          data.map((data, index) => (
-            <Link
-              to={`/${data.media_type}/details/${data.id}`}
-              key={index}
-              className="min-w-[60%] max-h-[90vh] md:min-w-[40%] lg:min-w-[20%] md:max-h-full mr-5 mb-5 overflow-x-auto rounded-md bg-zinc-800 p-1"
-            >
+    <div className="w-full max-w-7xl mx-auto px-4 ">
+      <div className="flex items-center justify-between pb-3">
+        <div className="flex-1" />
+        <div className="flex gap-2">
+          <button
+            onClick={() => scroll("left")}
+            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 text-white transition-colors"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      <div
+        ref={scrollContainer}
+        className="flex gap-4 overflow-x-auto pb-4 p-6 snap-x snap-mandatory scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600"
+      >
+        {data.map((item, index) => (
+          <Link
+            to={`/${item.media_type}/details/${item.id}`}
+            key={index}
+            className="snap-start flex-shrink-0 w-[280px] md:w-[300px] bg-zinc-800/80 rounded-lg overflow-hidden shadow-lg transform transition-all hover:scale-105 hover:bg-zinc-800"
+          >
+            <div className="relative pb-[140%]">
               <img
-                className="w-full object-cover rounded-md"
-                src={`https://image.tmdb.org/t/p/original/${
-                  data.profile_path || data.poster_path
-                }`}
+                className="absolute inset-0 w-full h-full object-cover rounded-t-lg"
+                src={
+                  item.profile_path || item.poster_path
+                    ? `https://image.tmdb.org/t/p/original/${
+                        item.profile_path || item.poster_path
+                      }`
+                    : noImage
+                }
+                alt={item.name || item.title}
+                loading="lazy"
               />
-              <div className="px-2">
-                <h1 className="text-sm md:text-xl font-bold text-white my-2 md:my-3">
-                  {data.name ||
-                    data.original_title ||
-                    data.original_name ||
-                    data.title}
-                </h1>
-                <p className="text-sm md:text-md leading-none tracking-tight text-zinc-400 mb-3">
-                  {data.overview.slice(0, 70)} ....
-                  <span className="text-blue-500">more</span>
-                </p>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <h1 className="text-3xl text-white text-center mt-4">
-            Nothing to show here
-          </h1>
-        )}
+            </div>
+
+            <div className="p-4">
+              <h2 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                {item.name ||
+                  item.original_title ||
+                  item.original_name ||
+                  item.title}
+              </h2>
+              <p className="text-sm text-zinc-400 line-clamp-2">
+                {item.overview}
+                <span className="text-blue-500 ml-1 hover:underline">more</span>
+              </p>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

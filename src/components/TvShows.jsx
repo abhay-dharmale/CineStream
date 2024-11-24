@@ -18,7 +18,7 @@ const TvShows = () => {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    document.title = "TV Shows | MovieApp";
+    document.title = "TV Shows | CineStream";
   }, []);
 
   const gettvshow = async () => {
@@ -85,7 +85,11 @@ const TvShows = () => {
           dataLength={tvshow.length}
           next={gettvshow}
           hasMore={hasMore}
-          loader={<div className="text-zinc-300 text-center">Loading...</div>}
+          loader={<div className="flex justify-center py-4">
+          <div className="text-zinc-300 text-center px-4 py-2 bg-zinc-800/50 rounded-full">
+            Loading...
+          </div>
+        </div>}
           className="px-4"
           scrollableTarget="scrollableDiv"
         >
