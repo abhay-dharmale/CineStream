@@ -83,10 +83,16 @@ const SideNav = () => {
         {/* Footer Links */}
         <nav className="flex flex-col space-y-3">
           <h2 className="text-lg font-semibold text-[#6556CD]">Website Info</h2>
-          <Link className="flex items-center hover:bg-[#2E2864] hover:text-white px-4 py-2 font-medium lg:font-normal rounded-lg transition-all duration-200 text-base lg:text-lg">
+          <Link
+            to="/about-us"
+            className="flex items-center hover:bg-[#2E2864] hover:text-white px-4 py-2 font-medium lg:font-normal rounded-lg transition-all duration-200 text-base lg:text-lg"
+          >
             <i className="mr-3 ri-information-fill"></i>About
           </Link>
-          <Link className="flex items-center hover:bg-[#2E2864] hover:text-white px-4 py-2 font-medium lg:font-normal rounded-lg transition-all duration-200 text-base lg:text-lg">
+          <Link
+            to="/contact-us"
+            className="flex items-center hover:bg-[#2E2864] hover:text-white px-4 py-2 font-medium lg:font-normal rounded-lg transition-all duration-200 text-base lg:text-lg"
+          >
             <i className="mr-3 ri-phone-fill"></i>Contact Us
           </Link>
         </nav>
