@@ -1,7 +1,6 @@
 import Home from "./components/Home";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Loading from "./components/Loading";
 import Trending from "./components/Trending";
 import Popular from "./components/Popular";
 import Movies from "./components/Movies";
