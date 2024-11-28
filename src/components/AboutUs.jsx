@@ -39,7 +39,7 @@ const AboutUs = () => {
           </div>
         </div>
         <p className="text-lg">
-          At MovieApp, we believe cinema is more than entertainment — it's an
+          At CineStream, we believe cinema is more than entertainment — it's an
           art form, a language, and a journey. Let's embark on this together. 🌟
         </p>
         <Link

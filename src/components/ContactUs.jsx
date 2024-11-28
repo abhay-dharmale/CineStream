@@ -1,18 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUs = () => {
   const navigate = useNavigate();
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    emailjs.send(serviceId, templateId, formData, publicKey).then(
+      (response) => {
+        // console.log("SUCCESS!", response.status, response.text);
+        toast.success("Your message has been sent successfully! 🎉", {
+          position: "top-center",
+          autoClose: 5000,
+        });
+        setFormData({ name: "", email: "", message: "" });
+      },
+      (error) => {
+        // console.error("FAILED...", error);
+        toast.error("Failed to send your message. Please try again later.", {
+          position: "top-center",
+          autoClose: 5000,
+        });
+      }
+    );
+  };
+
   return (
-    <section className="w-full h-full bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-300 py-16 px-8 overflow-y-auto">
-      <nav className="fixed top-0 left-0 z-[99] w-full flex h-14 items-center justify-between text-white gap-10 text-md lg:text-xl px-4">
+    <section className="relative w-full h-full bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-300 py-16 px-8 overflow-y-auto">
+      <ToastContainer />
+      <nav className="absolute top-0 left-0 z-[99] w-full flex h-14 items-center justify-between text-white gap-10 text-md lg:text-xl px-4">
         <Link
           onClick={() => navigate(-1)}
           className="hover: text-[#6556CD] text-2xl lg:text-md font-bold lg:font-normal ri-arrow-left-line"
         ></Link>
       </nav>
-      <div className="max-w-9xl h-full mx-auto">
+      <div className=" max-w-9xl h-full mx-auto">
         <h2 className="text-4xl font-bold text-yellow-400 text-center mb-6">
           🎬 Contact Us
         </h2>
@@ -32,10 +76,10 @@ const ContactUs = () => {
               <p className="mt-4">
                 <strong>Email:</strong>{" "}
                 <a
-                  href="mailto:support@movieapp.com"
+                  href="mailto:support@cinestream.com"
                   className="text-yellow-400 underline"
                 >
-                  support@movieapp.com
+                  support@cinestream.com
                 </a>
               </p>
               <p>
@@ -47,8 +91,7 @@ const ContactUs = () => {
             </div>
             <form
               className="bg-gray-800 p-6 rounded-lg shadow-lg"
-              action="#"
-              method="post"
+              onSubmit={handleSubmit}
             >
               <h3 className="text-2xl font-semibold text-yellow-300 mb-4">
                 Send Us a Message
@@ -58,12 +101,14 @@ const ContactUs = () => {
                   className="block text-gray-400 text-sm mb-2"
                   htmlFor="name"
                 >
-                  Name
+                  Your Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                   className="w-full p-3 outline-none rounded bg-gray-900 text-gray-300"
                 />
@@ -73,12 +118,14 @@ const ContactUs = () => {
                   className="block text-gray-400 text-sm mb-2"
                   htmlFor="email"
                 >
-                  Email
+                  Your Email
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full p-3 outline-none rounded bg-gray-900 text-gray-300"
                 />
@@ -88,11 +135,13 @@ const ContactUs = () => {
                   className="block text-gray-400 text-sm mb-2"
                   htmlFor="message"
                 >
-                  Message
+                  Your Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows="5"
                   required
                   className="w-full p-3 outline-none rounded bg-gray-900 text-gray-300"
