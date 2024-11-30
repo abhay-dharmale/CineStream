@@ -1,8 +1,45 @@
-# React + Vite
+# CineStream 🎬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+CineStream is a modern web application for movie and TV show enthusiasts, offering a seamless browsing and streaming experience.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- Browse trending movies and TV shows
+- Search across multiple categories
+- Detailed movie/show information
+- Responsive design
+- Integration with movie database API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
+- React
+- Vite
+- TMDB API
+- Tailwind CSS
+- React Router
+
+## 📦 Getting Started
+
+### Installation
+```bash
+git clone https://github.com/abhay-dharmale/CineStream.git
+cd CineStream
+npm install
+```
+
+### Environment Setup
+Create a `.env` file:
+```
+VITE_TMDB_API_KEY=your_api_key
+VITE_BASE_URL=https://api.themoviedb.org/3
+```
+
+### Run Development Server
+```bash
+npm run dev
+```
+
+## 🤝 Contributing
+Contributions are welcome! Please check the issues page.
+
+## 📄 License
+MIT License
