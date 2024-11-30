@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 const Header = ({ data }) => {
   return (
-    <div
+    <Link
+      to={`/${data.media_type}/details/${data.id}`}
       style={{
         background: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url(https://image.tmdb.org/t/p/original/${
           data.profile_path || data.backdrop_path
@@ -37,7 +38,7 @@ const Header = ({ data }) => {
       >
         Watch Trailer
       </Link>
-    </div>
+    </Link>
   );
 };
 
