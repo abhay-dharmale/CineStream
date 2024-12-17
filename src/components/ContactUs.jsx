@@ -48,7 +48,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="relative w-full h-full bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-300 py-16 px-8 overflow-y-auto">
+    <section className="relative w-full max-w-screen-2xl mx-auto h-full bg-gradient-to-b from-gray-900 via-black to-gray-900 text-gray-300 py-16 px-8 overflow-y-auto">
       <ToastContainer />
       <nav className="absolute top-0 left-0 z-[99] w-full flex h-14 items-center justify-between text-white gap-10 text-md lg:text-xl px-4">
         <Link

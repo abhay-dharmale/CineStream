@@ -50,7 +50,7 @@ const Popular = () => {
     <div className="flex h-full w-screen">
       <SideNav toggleSideNav={toggleSideNav} isOpen={isOpen} />
 
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto max-w-screen-2xl mx-auto">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-[#1F1E24] shadow-md">
           <div className="px-4 py-3 md:px-6 md:py-4">

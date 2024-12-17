@@ -24,7 +24,7 @@ const Topnav = () => {
   }, [query]);
 
   return (
-    <div className="relative w-full h-[6vh] p-9 md:px-9 md:h-[10vh] flex items-center justify-center">
+    <div className="relative w-full max-w-screen-2xl mx-auto h-[6vh] p-9 md:px-9 md:h-[10vh] flex items-center justify-center">
       {/* Menu button */}
       <button
         onClick={toggleSideNav}

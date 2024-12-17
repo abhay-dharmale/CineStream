@@ -28,7 +28,7 @@ const HorizontalCards = ({ data = [] }) => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 ">
+    <div className="w-full max-w-screen-2xl mx-auto mx-auto px-4 ">
       <div className="flex items-center justify-between pb-3">
         <div className="flex-1" />
         <div className="flex gap-2">

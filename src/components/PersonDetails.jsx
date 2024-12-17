@@ -81,7 +81,7 @@ const PersonDetails = () => {
       </nav>
 
       {/* Rest of the component remains the same... */}
-      <div className="w-full py-8 px-4 lg:px-8 mt-[10%] lg:mt-[3%]">
+      <div className="w-full max-w-screen-2xl mx-auto py-8 px-4 lg:px-8 mt-[10%] lg:mt-[3%]">
         <TopNav />
         <div className="w-full flex flex-col lg:flex-row mt-[5vh]">
           <div className="">
