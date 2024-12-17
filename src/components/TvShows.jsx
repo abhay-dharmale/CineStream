@@ -50,7 +50,7 @@ const TvShows = () => {
     <div className="flex h-full w-screen">
       <SideNav toggleSideNav={toggleSideNav} isOpen={isOpen} />
 
-      <div className="flex-grow overflow-y-auto px-[2%]">
+      <div className="flex-grow overflow-y-auto px-[2%] max-w-screen-2xl mx-auto">
         <div className="w-full flex items-center justify-between py-4 bg-zinc-800 lg:bg-[#1F1E24] lg:py-4">
           <h1
             className="text-sm lg:text-lg flex text-zinc-400 font-semibold cursor-pointer"
@@ -85,11 +85,13 @@ const TvShows = () => {
           dataLength={tvshow.length}
           next={gettvshow}
           hasMore={hasMore}
-          loader={<div className="flex justify-center py-4">
-          <div className="text-zinc-300 text-center px-4 py-2 bg-zinc-800/50 rounded-full">
-            Loading...
-          </div>
-        </div>}
+          loader={
+            <div className="flex justify-center py-4">
+              <div className="text-zinc-300 text-center px-4 py-2 bg-zinc-800/50 rounded-full">
+                Loading...
+              </div>
+            </div>
+          }
           className="px-4"
           scrollableTarget="scrollableDiv"
         >

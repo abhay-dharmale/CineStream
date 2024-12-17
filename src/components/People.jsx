@@ -50,7 +50,7 @@ const People = () => {
     <div className="flex h-full w-screen">
       <SideNav toggleSideNav={toggleSideNav} isOpen={isOpen} />
 
-      <div className="flex-grow overflow-y-auto px-[2%]">
+      <div className="flex-grow overflow-y-auto px-[2%] max-w-screen-2xl mx-auto">
         <div className="w-full flex items-center justify-between py-4 bg-zinc-800 lg:bg-[#1F1E24] lg:py-4">
           <h1
             className="text-sm lg:text-lg flex text-zinc-400 font-semibold cursor-pointer"
