@@ -41,9 +41,9 @@ const Home = () => {
 
   return wallpaper && trending ? (
     <>
-      <SideNav /> {/* Removed toggleSideNav and isOpen props */}
+      <SideNav /> 
       <div className="w-full max-w-screen-2xl mx-auto h-full overflow-y-auto">
-        <Topnav /> {/* Removed toggleSideNav prop */}
+        <Topnav /> 
         <Header data={wallpaper} />
         <div className="px-6 py-4 flex items-center justify-between">
           <h1 className="text-lg md:text-xl text-zinc-300 font-bold mt-5">

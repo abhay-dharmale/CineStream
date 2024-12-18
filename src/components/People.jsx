@@ -68,7 +68,7 @@ const People = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <Topnav />
           <div className="px-9 flex w-full items-center justify-center">
-            {/* If you want to add category dropdown in the future */}
+            {/* want to add category dropdown in the future */}
             {/* <Dropdown
               title="Category"
               options={["popular"]}
