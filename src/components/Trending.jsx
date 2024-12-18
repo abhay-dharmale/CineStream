@@ -85,14 +85,15 @@ const Trending = () => {
                   func={(e) => {
                     setCategory(e.target.value);
                   }}
+                  value={category}
                 />
                 <Dropdown
                   title="Duration"
                   options={["day", "week"]}
                   func={(e) => {
-                    setCategory(e.target.value);
+                    setDuration(e.target.value);
                   }}
-                  value={category}
+                  value={duration}
                 />
               </div>
             </div>
